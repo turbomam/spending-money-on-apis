@@ -137,3 +137,19 @@ costs:
 	fi
 
 .DEFAULT_GOAL := help
+
+# Test Google APIs and check usage
+.PHONY: test-google
+test-google:
+	@echo "Testing Google APIs and checking usage..."
+	$(UV) run $(PYTHON) $(EXAMPLES_DIR)/google_api_usage.py
+
+# Show usage logs
+.PHONY: show-logs
+show-logs:
+	@if [ -d logs ]; then \
+		echo "Recent API usage logs:"; \
+		ls -lht logs/*.json | head -5; \
+	else \
+		echo "No usage logs found"; \
+	fi
